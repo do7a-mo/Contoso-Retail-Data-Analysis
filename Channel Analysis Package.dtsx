@@ -1,0 +1,1832 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/12/2025 3:39:13 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HAZEM"
+  DTS:CreatorName="AzureAD\حازممدحتعبدالعزيزعبد"
+  DTS:DTSID="{FD65E00D-E825-45F6-BC73-40E1A73ED8A5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{35EAF02B-CFBF-4A65-825B-735926BF053D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A740CEDA-E4CC-4AF2-83E6-5EBD6079D703}"
+      DTS:ObjectName="HAZEM.ContosoRetailDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=HAZEM;Initial Catalog=ContosoRetailDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{A740CEDA-E4CC-4AF2-83E6-5EBD6079D703}HAZEM.ContosoRetailDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ChannelAnalysis"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{01fa6edd-622f-4979-a971-038e940b23e5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ChannelAnalysis"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ChannelAnalysis\Aggregate 1"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate 1"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Aggregate 1.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Inputs[Aggregate Input 1].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Inputs[Aggregate Input 1].Columns[ChannelName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ChannelName"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelName]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Inputs[Aggregate Input 1].Columns[ChannelLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ChannelLabel"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelLabel]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Inputs[Aggregate Input 1].Columns[SalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="SalesAmount"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Inputs[Aggregate Input 1].Columns[SalesKey]"
+                      cachedDataType="i4"
+                      cachedName="SalesKey"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      name="DateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelName]"
+                      name="ChannelName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelLabel]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelLabel]"
+                      name="ChannelLabel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelLabel]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[TotalSalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[TotalSalesAmount]"
+                      name="TotalSalesAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[AvgSalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[AvgSalesAmount]"
+                      name="AvgSalesAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">5</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[SalesKey]"
+                      dataType="ui4"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[SalesKey]"
+                      name="SalesKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">3</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                          name="CountDistinctScale">0</property>
+                        <property
+                          dataType="System.UInt32"
+                          description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                          name="CountDistinctKeys">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Aggregate 2"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate 2"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Aggregate 2.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 2.Inputs[Aggregate Input 1].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 2.Inputs[Aggregate Input 1].Columns[SalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="SalesAmount"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      name="DateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[TotalChannelSales]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[TotalChannelSales]"
+                      name="TotalChannelSales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Channel Analysis"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Channel Analysis"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[ChannelAnalysis]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ChannelAnalysis\Channel Analysis.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].Columns[ChannelName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ChannelName"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ChannelName]"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[ChannelName]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].Columns[ChannelLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ChannelLabel"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ChannelLabel]"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[ChannelLabel]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].Columns[TotalSalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="TotalSalesAmount"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[TotalSalesAmount]"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalSalesAmount]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].Columns[AvgSalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="AvgSalesAmount"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[AvgSalesAmount]"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[AvgSalesAmount]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].Columns[TotalChannelSales]"
+                      cachedDataType="cy"
+                      cachedName="TotalChannelSales"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[TotalChannelSales]"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalChannelSales]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].Columns[MarketSahre]"
+                      cachedDataType="cy"
+                      cachedName="MarketSahre"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[MarketSahre]"
+                      lineageId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Output].Columns[MarketSahre]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ChannelName]"
+                      dataType="wstr"
+                      length="20"
+                      name="ChannelName" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ChannelLabel]"
+                      dataType="wstr"
+                      length="100"
+                      name="ChannelLabel" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[TotalSalesAmount]"
+                      dataType="cy"
+                      name="TotalSalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[AvgSalesAmount]"
+                      dataType="cy"
+                      name="AvgSalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[TotalChannelSales]"
+                      dataType="cy"
+                      name="TotalChannelSales" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input].ExternalColumns[MarketSahre]"
+                      dataType="cy"
+                      name="MarketSahre" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Channel Analysis.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Channel Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Channel Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Channel Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Derived Column.Inputs[Derived Column Input].Columns[TotalSalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="TotalSalesAmount"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalSalesAmount]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Derived Column.Inputs[Derived Column Input].Columns[TotalChannelSales]"
+                      cachedDataType="cy"
+                      cachedName="TotalChannelSales"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalChannelSales]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ChannelAnalysis\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Output].Columns[MarketSahre]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Output].Columns[MarketSahre]"
+                      name="MarketSahre"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalSalesAmount]} / #{Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalChannelSales]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TotalSalesAmount / TotalChannelSales</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ChannelAnalysis\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Fact Sales"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Fact Sales"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+s.SalesKey,
+s.DateKey ,
+s.channelKey ,
+s.SalesAmount ,
+c.ChannelName,
+c.ChannelLabel
+
+FROM FactSales s
+JOIN DimChannel c ON s.ChannelKey = c.ChannelKey</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ChannelAnalysis\Fact Sales.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ChannelName]"
+                      length="20"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelName]"
+                      name="ChannelName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[channelKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[channelKey]"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[channelKey]"
+                      name="channelKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      name="SalesAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelLabel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ChannelLabel]"
+                      length="100"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[ChannelLabel]"
+                      name="ChannelLabel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesKey]"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]"
+                      name="SalesKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ChannelName]"
+                      dataType="wstr"
+                      length="20"
+                      name="ChannelName" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[channelKey]"
+                      dataType="i4"
+                      name="channelKey" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      dataType="cy"
+                      name="SalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ChannelLabel]"
+                      dataType="wstr"
+                      length="100"
+                      name="ChannelLabel" />
+                    <externalMetadataColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesKey]"
+                      dataType="i4"
+                      name="SalesKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesKey]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesKey]"
+                      name="SalesKey" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[channelKey]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[channelKey]"
+                      name="channelKey" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      name="SalesAmount" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ChannelName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ChannelName]"
+                      name="ChannelName" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ChannelLabel]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ChannelLabel]"
+                      name="ChannelLabel" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Left Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Left Input].Columns[TotalChannelSales]"
+                      cachedDataType="cy"
+                      cachedName="TotalChannelSales"
+                      lineageId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output].Columns[TotalChannelSales]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[ChannelName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ChannelName"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[ChannelName]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[ChannelLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ChannelLabel"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[ChannelLabel]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[TotalSalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="TotalSalesAmount"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[TotalSalesAmount]" />
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[AvgSalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="AvgSalesAmount"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[AvgSalesAmount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[DateKey]"
+                      name="DateKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[DateKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[ChannelName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[ChannelName]"
+                      name="ChannelName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[ChannelName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[ChannelLabel]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[ChannelLabel]"
+                      name="ChannelLabel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[ChannelLabel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalSalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalSalesAmount]"
+                      name="TotalSalesAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[TotalSalesAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[AvgSalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[AvgSalesAmount]"
+                      name="AvgSalesAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input].Columns[AvgSalesAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalChannelSales]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output].Columns[TotalChannelSales]"
+                      name="TotalChannelSales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Left Input].Columns[TotalChannelSales]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\ChannelAnalysis\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ChannelAnalysis\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\ChannelAnalysis\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ChannelAnalysis\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\ChannelAnalysis\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Sort 1.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Inputs[Sort Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[DateKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Inputs[Sort Input].Columns[ChannelName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ChannelName"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Inputs[Sort Input].Columns[ChannelLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ChannelLabel"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelLabel]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Inputs[Sort Input].Columns[TotalSalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="TotalSalesAmount"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[TotalSalesAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Inputs[Sort Input].Columns[AvgSalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="AvgSalesAmount"
+                      lineageId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[AvgSalesAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[DateKey]"
+                      name="DateKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[DateKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[ChannelName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[ChannelName]"
+                      name="ChannelName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[ChannelLabel]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[ChannelLabel]"
+                      name="ChannelLabel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[ChannelLabel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[TotalSalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[TotalSalesAmount]"
+                      name="TotalSalesAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[TotalSalesAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[AvgSalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output].Columns[AvgSalesAmount]"
+                      name="AvgSalesAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1].Columns[AvgSalesAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ChannelAnalysis\Sort 2"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 2"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ChannelAnalysis\Sort 2.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Sort 2.Inputs[Sort Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[DateKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ChannelAnalysis\Sort 2.Inputs[Sort Input].Columns[TotalChannelSales]"
+                      cachedDataType="cy"
+                      cachedName="TotalChannelSales"
+                      lineageId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[TotalChannelSales]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output].Columns[DateKey]"
+                      name="DateKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[DateKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output].Columns[TotalChannelSales]"
+                      dataType="cy"
+                      lineageId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output].Columns[TotalChannelSales]"
+                      name="TotalChannelSales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1].Columns[TotalChannelSales]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ChannelAnalysis.Paths[Aggregate Output 1]"
+              endId="Package\ChannelAnalysis\Sort 1.Inputs[Sort Input]"
+              name="Aggregate Output 1"
+              startId="Package\ChannelAnalysis\Aggregate 1.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[Aggregate Output 11]"
+              endId="Package\ChannelAnalysis\Sort 2.Inputs[Sort Input]"
+              name="Aggregate Output 1"
+              startId="Package\ChannelAnalysis\Aggregate 2.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[Derived Column Output]"
+              endId="Package\ChannelAnalysis\Channel Analysis.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\ChannelAnalysis\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[Merge Join Output]"
+              endId="Package\ChannelAnalysis\Derived Column.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\ChannelAnalysis\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[Multicast Output 1]"
+              endId="Package\ChannelAnalysis\Aggregate 1.Inputs[Aggregate Input 1]"
+              name="Multicast Output 1"
+              startId="Package\ChannelAnalysis\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[Multicast Output 2]"
+              endId="Package\ChannelAnalysis\Aggregate 2.Inputs[Aggregate Input 1]"
+              name="Multicast Output 2"
+              startId="Package\ChannelAnalysis\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[OLE DB Source Output]"
+              endId="Package\ChannelAnalysis\Multicast.Inputs[Multicast Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\ChannelAnalysis\Fact Sales.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[Sort Output]"
+              endId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\ChannelAnalysis\Sort 1.Outputs[Sort Output]" />
+            <path
+              refId="Package\ChannelAnalysis.Paths[Sort Output1]"
+              endId="Package\ChannelAnalysis\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\ChannelAnalysis\Sort 2.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate ChannelAnalysis"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{a69395fd-7978-4bb0-97e1-ba0361c71ea3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate ChannelAnalysis"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A740CEDA-E4CC-4AF2-83E6-5EBD6079D703}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE ChannelAnalysis ;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{ac4e6a71-5f5d-4075-87b6-d910b52ef51b}"
+      DTS:From="Package\Truncate ChannelAnalysis"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\ChannelAnalysis" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\ChannelAnalysis"
+          TopLeft="87.1428572006371,176.235294015762" />
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Truncate ChannelAnalysis"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="161.771428600319,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74.635294015762"
+              Start="0,0"
+              End="0,67.135294015762">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.135294015762" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ChannelAnalysis">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\ChannelAnalysis\Aggregate 2"
+          TopLeft="565.314286301209,240.117646848351" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\ChannelAnalysis\Merge Join"
+          TopLeft="453.657143608283,440.470587849205" />
+        <NodeLayout
+          Size="157.6,41.6"
+          Id="Package\ChannelAnalysis\Channel Analysis"
+          TopLeft="429.371429270871,594.941175949099" />
+        <NodeLayout
+          Size="125.6,41.6"
+          Id="Package\ChannelAnalysis\Fact Sales"
+          TopLeft="438.571429505032,55.0588234811506" />
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\ChannelAnalysis\Sort 1"
+          TopLeft="351.971428472594,324.235293833442" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\ChannelAnalysis\Multicast"
+          TopLeft="447.628571676417,158.294117508308" />
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\ChannelAnalysis\Sort 2"
+          TopLeft="582.228572453407,322.705882070077" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\ChannelAnalysis\Derived Column"
+          TopLeft="439.371429292158,513.882352490739" />
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\ChannelAnalysis\Aggregate 1"
+          TopLeft="338.885714390631,240.882352730034" />
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Sort Output1]"
+          TopLeft="635.428572453407,364.305882070077">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-96.7047621784574,76.164705779128"
+              Start="0,0"
+              End="-96.7047621784574,68.664705779128">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.1415207422637" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.1415207422637"
+                    Point2="0,45.1415207422637"
+                    Point3="-4,45.1415207422637" />
+                  <mssgle:LineSegment
+                    End="-92.7047621784574,45.1415207422637" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-92.7047621784574,45.1415207422637"
+                    Point2="-96.7047621784574,45.1415207422637"
+                    Point3="-96.7047621784574,49.1415207422637" />
+                  <mssgle:LineSegment
+                    End="-96.7047621784574,68.664705779128" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Sort Output]"
+          TopLeft="405.171428472594,365.835293833442">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.0190484690223,74.635294015763"
+              Start="0,0"
+              End="93.0190484690223,67.135294015763">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.2350645020254" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,40.2350645020254"
+                    Point2="0,44.2350645020254"
+                    Point3="4,44.2350645020254" />
+                  <mssgle:LineSegment
+                    End="89.0190484690223,44.2350645020254" />
+                  <mssgle:CubicBezierSegment
+                    Point1="89.0190484690223,44.2350645020254"
+                    Point2="93.0190484690223,44.2350645020254"
+                    Point3="93.0190484690223,48.2350645020254" />
+                  <mssgle:LineSegment
+                    End="93.0190484690223,67.135294015763" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[OLE DB Source Output]"
+          TopLeft="504.500000590724,96.6588234811506">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.6352940271574"
+              Start="0,0"
+              End="0,54.1352940271574">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.1352940271574" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Multicast Output 2]"
+          TopLeft="526.295238343084,199.894117508308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="107.019047958125,40.223529340043"
+              Start="0,0"
+              End="107.019047958125,32.723529340043">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.4069659150176" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.4069659150176"
+                    Point2="0,16.4069659150176"
+                    Point3="4,16.4069659150176" />
+                  <mssgle:LineSegment
+                    End="103.019047958125,16.4069659150176" />
+                  <mssgle:CubicBezierSegment
+                    Point1="103.019047958125,16.4069659150176"
+                    Point2="107.019047958125,16.4069659150176"
+                    Point3="107.019047958125,20.4069659150176" />
+                  <mssgle:LineSegment
+                    End="107.019047958125,32.723529340043" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Multicast Output 1]"
+          TopLeft="488.96190500975,199.894117508308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-82.0761906191193,40.988235221726"
+              Start="0,0"
+              End="-82.0761906191193,33.488235221726">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.7188854193882" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.7188854193882"
+                    Point2="0,16.7188854193882"
+                    Point3="-4,16.7188854193882" />
+                  <mssgle:LineSegment
+                    End="-78.0761906191193,16.7188854193882" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-78.0761906191193,16.7188854193882"
+                    Point2="-82.0761906191193,16.7188854193882"
+                    Point3="-82.0761906191193,20.7188854193882" />
+                  <mssgle:LineSegment
+                    End="-82.0761906191193,33.488235221726" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Merge Join Output]"
+          TopLeft="517.114286450221,482.070587849205">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.8117646415342"
+              Start="0,0"
+              End="0,24.3117646415342">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.3117646415342" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Derived Column Output]"
+          TopLeft="511.971429281515,555.482352490739">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.45882345836"
+              Start="0,0"
+              End="0,31.95882345836">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.95882345836" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Aggregate Output 11]"
+          TopLeft="634.371429377308,281.717646848351">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.988235221726"
+              Start="0,0"
+              End="0,33.488235221726">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.488235221726" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ChannelAnalysis.Paths[Aggregate Output 1]"
+          TopLeft="406.028571431612,282.482352730034">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.752941103408"
+              Start="0,0"
+              End="0,34.252941103408">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.252941103408" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ChannelAnalysis\Channel Analysis">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ChannelAnalysis\Fact Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

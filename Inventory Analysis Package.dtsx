@@ -1,0 +1,1755 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/12/2025 3:40:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HAZEM"
+  DTS:CreatorName="AzureAD\حازممدحتعبدالعزيزعبد"
+  DTS:DTSID="{0DB73E69-CBA9-45C0-9A55-6A36A864D7EF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{D607EDD5-5CE3-47A6-A0A8-582B49B92F4F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{74164FD9-E201-489E-B73E-0C2A852139DE}"
+      DTS:ObjectName="HAZEM.ContosoRetailDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=HAZEM;Initial Catalog=ContosoRetailDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{74164FD9-E201-489E-B73E-0C2A852139DE}HAZEM.ContosoRetailDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Inventory Stock"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{d5eade18-6a9f-4dad-8b55-64480437b47a}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Inventory Stock"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Inventory Stock\Aggregate"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="ProductName"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[BrandName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="BrandName"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[BrandName]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[Manufacturer]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Manufacturer"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[Manufacturer]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[StoreType]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="StoreType"
+                      lineageId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[StoreName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="StoreName"
+                      lineageId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[OnHandQuantity]"
+                      cachedDataType="i4"
+                      cachedName="OnHandQuantity"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnHandQuantity]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[OnOrderQuantity]"
+                      cachedDataType="i4"
+                      cachedName="OnOrderQuantity"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnOrderQuantity]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[SafetyStockQuantity]"
+                      cachedDataType="i4"
+                      cachedName="SafetyStockQuantity"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[SafetyStockQuantity]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[UnitCost]"
+                      cachedDataType="cy"
+                      cachedName="UnitCost"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[UnitCost]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[DaysInStock]"
+                      cachedDataType="i4"
+                      cachedName="DaysInStock"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[DaysInStock]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1].Columns[StoreKey]"
+                      cachedDataType="i4"
+                      cachedName="StoreKey"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[StoreKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[ProductName]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[ProductName]"
+                      name="ProductName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[ProductName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[BrandName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[BrandName]"
+                      name="BrandName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[BrandName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[Manufacturer]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[Manufacturer]"
+                      name="Manufacturer">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[Manufacturer]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreType]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreType]"
+                      name="StoreType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreName]"
+                      name="StoreName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[OnHandQuantity]"
+                      dataType="i8"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[OnHandQuantity]"
+                      name="OnHandQuantity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnHandQuantity]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[OnOrderQuantity]"
+                      dataType="i8"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[OnOrderQuantity]"
+                      name="OnOrderQuantity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnOrderQuantity]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[SafetyStockQuantity]"
+                      dataType="i8"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[SafetyStockQuantity]"
+                      name="SafetyStockQuantity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[SafetyStockQuantity]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[UnitCost]"
+                      dataType="cy"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[UnitCost]"
+                      name="UnitCost">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[UnitCost]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[DaysInStock]"
+                      dataType="ui8"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[DaysInStock]"
+                      name="DaysInStock">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[DaysInStock]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[ProductKey]"
+                      name="ProductKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ProductKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreKey]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreKey]"
+                      name="StoreKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[StoreKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inventory Stock\Fact Inventory"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Fact Inventory"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactInventory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inventory Stock\Fact Inventory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[InventoryKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[InventoryKey]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[InventoryKey]"
+                      name="InventoryKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      name="StoreKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      name="CurrencyKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnHandQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[OnHandQuantity]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnHandQuantity]"
+                      name="OnHandQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnOrderQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[OnOrderQuantity]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[OnOrderQuantity]"
+                      name="OnOrderQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[SafetyStockQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[SafetyStockQuantity]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[SafetyStockQuantity]"
+                      name="SafetyStockQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      name="UnitCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[DaysInStock]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[DaysInStock]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[DaysInStock]"
+                      name="DaysInStock"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[MinDayInStock]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[MinDayInStock]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[MinDayInStock]"
+                      name="MinDayInStock"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[MaxDayInStock]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[MaxDayInStock]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[MaxDayInStock]"
+                      name="MaxDayInStock"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[Aging]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[Aging]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[Aging]"
+                      name="Aging"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      name="ETLLoadID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      name="LoadDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[InventoryKey]"
+                      dataType="i4"
+                      name="InventoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      dataType="i4"
+                      name="StoreKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      dataType="i4"
+                      name="CurrencyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[OnHandQuantity]"
+                      dataType="i4"
+                      name="OnHandQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[OnOrderQuantity]"
+                      dataType="i4"
+                      name="OnOrderQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[SafetyStockQuantity]"
+                      dataType="i4"
+                      name="SafetyStockQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      dataType="cy"
+                      name="UnitCost" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[DaysInStock]"
+                      dataType="i4"
+                      name="DaysInStock" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[MinDayInStock]"
+                      dataType="i4"
+                      name="MinDayInStock" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[MaxDayInStock]"
+                      dataType="i4"
+                      name="MaxDayInStock" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[Aging]"
+                      dataType="i4"
+                      name="Aging" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      dataType="i4"
+                      name="ETLLoadID" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[InventoryKey]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[InventoryKey]"
+                      name="InventoryKey" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      name="StoreKey" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      name="CurrencyKey" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[OnHandQuantity]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[OnHandQuantity]"
+                      name="OnHandQuantity" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[OnOrderQuantity]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[OnOrderQuantity]"
+                      name="OnOrderQuantity" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[SafetyStockQuantity]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[SafetyStockQuantity]"
+                      name="SafetyStockQuantity" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      dataType="cy"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      name="UnitCost" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[DaysInStock]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[DaysInStock]"
+                      name="DaysInStock" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[MinDayInStock]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[MinDayInStock]"
+                      name="MinDayInStock" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[MaxDayInStock]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[MaxDayInStock]"
+                      name="MaxDayInStock" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[Aging]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[Aging]"
+                      name="Aging" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      name="ETLLoadID" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      name="LoadDate" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inventory Stock\Inventory Analysis"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Inventory Analysis"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[InventoryAnalysis]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inventory Stock\Inventory Analysis.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[BrandName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="BrandName"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[BrandName]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[BrandName]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[Manufacturer]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Manufacturer"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[Manufacturer]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[Manufacturer]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[StoreType]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="StoreType"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[StoreType]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreType]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[StoreName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="StoreName"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[StoreName]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreName]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[OnHandQuantity]"
+                      cachedDataType="i8"
+                      cachedName="OnHandQuantity"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[OnHandQuantity]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[OnHandQuantity]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[OnOrderQuantity]"
+                      cachedDataType="i8"
+                      cachedName="OnOrderQuantity"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[OnOrderQuantity]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[OnOrderQuantity]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[SafetyStockQuantity]"
+                      cachedDataType="i8"
+                      cachedName="SafetyStockQuantity"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[SafetyStockQuantity]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[SafetyStockQuantity]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[UnitCost]"
+                      cachedDataType="cy"
+                      cachedName="UnitCost"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[UnitCost]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[UnitCost]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[DaysInStock]"
+                      cachedDataType="ui8"
+                      cachedName="DaysInStock"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[DaysInStock]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[DaysInStock]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].Columns[StoreKey]"
+                      cachedDataType="i4"
+                      cachedName="StoreKey"
+                      externalMetadataColumnId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[StoreKey]"
+                      lineageId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1].Columns[StoreKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="500"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[BrandName]"
+                      dataType="wstr"
+                      length="50"
+                      name="BrandName" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[Manufacturer]"
+                      dataType="wstr"
+                      length="50"
+                      name="Manufacturer" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[StoreType]"
+                      dataType="wstr"
+                      length="15"
+                      name="StoreType" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[StoreName]"
+                      dataType="wstr"
+                      length="100"
+                      name="StoreName" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[OnHandQuantity]"
+                      dataType="i8"
+                      name="OnHandQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[OnOrderQuantity]"
+                      dataType="i8"
+                      name="OnOrderQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[SafetyStockQuantity]"
+                      dataType="i8"
+                      name="SafetyStockQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[UnitCost]"
+                      dataType="cy"
+                      name="UnitCost" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[DaysInStock]"
+                      dataType="numeric"
+                      name="DaysInStock"
+                      precision="20" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input].ExternalColumns[StoreKey]"
+                      dataType="i4"
+                      name="StoreKey" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inventory Stock\Inventory Analysis.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Inventory Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Inventory Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Inventory Analysis.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inventory Stock\Lookup Product"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Product"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimProduct]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimProduct]) [refTable]
+where [refTable].[ProductKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ProductKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductLabel" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductName" dataType="DT_WSTR" length="500" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductDescription" dataType="DT_WSTR" length="400" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductSubcategoryKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Manufacturer" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BrandName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ClassID" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ClassName" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StyleID" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StyleName" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ColorID" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ColorName" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Size" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SizeRange" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SizeUnitMeasureID" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Weight" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="WeightUnitMeasureID" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitOfMeasureID" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitOfMeasureName" dataType="DT_WSTR" length="40" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StockTypeID" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StockTypeName" dataType="DT_WSTR" length="40" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitCost" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitPrice" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AvailableForSaleDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StopSaleDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Status" dataType="DT_WSTR" length="7" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ImageURL" dataType="DT_WSTR" length="150" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductURL" dataType="DT_WSTR" length="150" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ETLLoadID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LoadDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UpdateDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ProductKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inventory Stock\Lookup Product.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Inventory Stock\Lookup Product.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inventory Stock\Lookup Product.Inputs[Lookup Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[ProductKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProductKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Inventory Stock\Lookup Product.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[ProductName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="500"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[ProductName]"
+                      name="ProductName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProductName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[BrandName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[BrandName]"
+                      name="BrandName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">BrandName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[Manufacturer]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output].Columns[Manufacturer]"
+                      name="Manufacturer"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Manufacturer</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Inventory Stock\Lookup Product.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Inventory Stock\Lookup Product.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inventory Stock\Lookup Store"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Store"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimStore]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimStore]) [refTable]
+where [refTable].[StoreKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StoreKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GeographyKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreManager" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreType" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreDescription" dataType="DT_WSTR" length="300" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Status" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OpenDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CloseDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EntityKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ZipCode" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ZipCodeExtension" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StorePhone" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreFax" dataType="DT_WSTR" length="14" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine1" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine2" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CloseReason" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EmployeeCount" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SellingAreaSize" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastRemodelDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GeoLocation" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Geometry" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ETLLoadID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LoadDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UpdateDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[StoreKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inventory Stock\Lookup Store.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Inventory Stock\Lookup Store.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inventory Stock\Lookup Store.Inputs[Lookup Input].Columns[StoreKey]"
+                      cachedDataType="i4"
+                      cachedName="StoreKey"
+                      lineageId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output].Columns[StoreKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">StoreKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Inventory Stock\Lookup Store.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="15"
+                      lineageId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]"
+                      name="StoreType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StoreType</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]"
+                      name="StoreName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StoreName</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inventory Stock\Lookup Store.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Inventory Stock\Lookup Store.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Inventory Stock\Lookup Store.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Inventory Stock.Paths[Aggregate Output 1]"
+              endId="Package\Inventory Stock\Inventory Analysis.Inputs[OLE DB Destination Input]"
+              name="Aggregate Output 1"
+              startId="Package\Inventory Stock\Aggregate.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\Inventory Stock.Paths[Lookup Match Output]"
+              endId="Package\Inventory Stock\Lookup Store.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Inventory Stock\Lookup Product.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Inventory Stock.Paths[Lookup Match Output1]"
+              endId="Package\Inventory Stock\Aggregate.Inputs[Aggregate Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Inventory Stock\Lookup Store.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Inventory Stock.Paths[OLE DB Source Output]"
+              endId="Package\Inventory Stock\Lookup Product.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Inventory Stock\Fact Inventory.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Inventory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5fa86c50-5471-43a0-9c68-625272c1a040}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Inventory"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{74164FD9-E201-489E-B73E-0C2A852139DE}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE InventoryAnalysis ;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{bb75c99b-73ad-43eb-a776-d24332347b81}"
+      DTS:From="Package\Truncate Inventory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Inventory Stock" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Inventory Stock"
+          TopLeft="62.857142863225,166.294117553888" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Truncate Inventory"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="141.828571431612,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.6941175538877"
+              Start="0,0"
+              End="0,57.1941175538877">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.1941175538877" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Inventory Stock">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Inventory Stock\Lookup Product"
+          TopLeft="383.857132928407,131.411761771746" />
+        <NodeLayout
+          Size="146.4,41.6"
+          Id="Package\Inventory Stock\Fact Inventory"
+          TopLeft="382.142847568101,46.4117634029847" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\Inventory Stock\Lookup Store"
+          TopLeft="387.57141876981,222.294113090552" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Inventory Stock\Inventory Analysis"
+          TopLeft="384.285715103758,393.823529066563" />
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\Inventory Stock\Aggregate"
+          TopLeft="397.857132890091,307.117641291971" />
+        <EdgeLayout
+          Id="Package\Inventory Stock.Paths[Aggregate Output 1]"
+          TopLeft="463.871423996924,348.717641291971">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.1058877745921"
+              Start="0,0"
+              End="0,37.6058877745921">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.6058877745921" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inventory Stock.Paths[OLE DB Source Output]"
+          TopLeft="457.599990248254,88.0117634029847">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.3999983687613"
+              Start="0,0"
+              End="0,35.8999983687613">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.8999983687613" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inventory Stock.Paths[Lookup Match Output1]"
+          TopLeft="459.514275829951,263.894113090552">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.2235282014192"
+              Start="0,0"
+              End="0,35.7235282014192">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.7235282014192" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,12.0570766007096,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inventory Stock.Paths[Lookup Match Output]"
+          TopLeft="458.914275849109,173.011761771746">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.2823513188059"
+              Start="0,0"
+              End="0,41.7823513188059">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.7823513188059" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,15.0864881594029,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inventory Stock\Fact Inventory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inventory Stock\Inventory Analysis">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inventory Stock\Lookup Store">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStore]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inventory Stock\Lookup Product">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProduct]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

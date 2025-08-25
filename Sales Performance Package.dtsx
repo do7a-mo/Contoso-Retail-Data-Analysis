@@ -1,0 +1,1959 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/10/2025 4:06:20 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HAZEM"
+  DTS:CreatorName="AzureAD\حازممدحتعبدالعزيزعبد"
+  DTS:DTSID="{18A5AAF1-AFE4-48BB-B5CF-B283349ADC8B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Sales Performance Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="51"
+  DTS:VersionGUID="{CADB55A0-9708-40A3-982E-FB13EBF3DAC1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C407E756-82D5-4C46-9A70-5001EB2CC8A7}"
+      DTS:ObjectName="HAZEM.ContosoRetailDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=HAZEM;Initial Catalog=ContosoRetailDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package-{C407E756-82D5-4C46-9A70-5001EB2CC8A7}HAZEM.ContosoRetailDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\SalesPerformance"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2D8A867C-B0A8-4CB2-B31B-A8D43C44924C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SalesPerformance"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\SalesPerformance\Aggregate"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[GeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="GeographyKey"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[GeographyKey]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[CustomerName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      lineageId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[NetSales]"
+                      cachedDataType="cy"
+                      cachedName="NetSales"
+                      lineageId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[NetSales]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[MaritalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="MaritalStatus"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[MaritalStatus]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Gender"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[YearlyIncome]"
+                      cachedDataType="cy"
+                      cachedName="YearlyIncome"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[YearlyIncome]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[TotalChildren]"
+                      cachedDataType="ui1"
+                      cachedName="TotalChildren"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[TotalChildren]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[Education]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Education"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Education]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[Occupation]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Occupation"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Occupation]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[HouseOwnerFlag]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="HouseOwnerFlag"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[HouseOwnerFlag]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1].Columns[CustomerType]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="CustomerType"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerType]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      name="DateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DateKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerKey]"
+                      name="CustomerKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyKey]"
+                      name="GeographyKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[GeographyKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerName]"
+                      name="CustomerName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[CustomerName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[NetSales]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[NetSales]"
+                      name="NetSales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[NetSales]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[MaritalStatus]"
+                      name="MaritalStatus">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[MaritalStatus]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Gender]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Gender]"
+                      name="Gender">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Gender]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[YearlyIncome]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[YearlyIncome]"
+                      name="YearlyIncome">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[YearlyIncome]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[TotalChildren]"
+                      dataType="ui8"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[TotalChildren]"
+                      name="TotalChildren">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[TotalChildren]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Education]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Education]"
+                      name="Education">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Education]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Occupation]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Occupation]"
+                      name="Occupation">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Occupation]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[HouseOwnerFlag]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[HouseOwnerFlag]"
+                      name="HouseOwnerFlag">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[HouseOwnerFlag]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerType]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerType]"
+                      name="CustomerType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerType]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SalesPerformance\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input].Columns[SalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="SalesAmount"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input].Columns[ReturnAmount]"
+                      cachedDataType="cy"
+                      cachedName="ReturnAmount"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input].Columns[DiscountAmount]"
+                      cachedDataType="cy"
+                      cachedName="DiscountAmount"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input].Columns[TotalCost]"
+                      cachedDataType="cy"
+                      cachedName="TotalCost"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[TotalCost]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[LastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[NetSales]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[NetSales]"
+                      name="NetSales"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(#{Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]} - #{Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]} - #{Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]}) - #{Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[TotalCost]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(SalesAmount - ReturnAmount - DiscountAmount) - TotalCost</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[CustomerName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[FirstName]} + #{Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[LastName]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">FirstName + LastName</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SalesPerformance\Fact Online Sales"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Fact Online Sales"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactOnlineSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SalesPerformance\Fact Online Sales.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[OnlineSalesKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[OnlineSalesKey]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[OnlineSalesKey]"
+                      name="OnlineSalesKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      name="StoreKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[PromotionKey]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[PromotionKey]"
+                      name="PromotionKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      name="CurrencyKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[CustomerKey]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesOrderNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderNumber]"
+                      length="20"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesOrderNumber]"
+                      name="SalesOrderNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesOrderLineNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderLineNumber]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesOrderLineNumber]"
+                      name="SalesOrderLineNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesQuantity]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]"
+                      name="SalesQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      name="SalesAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ReturnQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnQuantity]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ReturnQuantity]"
+                      name="ReturnQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnAmount]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]"
+                      name="ReturnAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DiscountQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountQuantity]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DiscountQuantity]"
+                      name="DiscountQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountAmount]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]"
+                      name="DiscountAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[TotalCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[TotalCost]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[TotalCost]"
+                      name="TotalCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      name="UnitCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      name="ETLLoadID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      name="LoadDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[OnlineSalesKey]"
+                      dataType="i4"
+                      name="OnlineSalesKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      dataType="i4"
+                      name="StoreKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[PromotionKey]"
+                      dataType="i4"
+                      name="PromotionKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      dataType="i4"
+                      name="CurrencyKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="SalesOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderLineNumber]"
+                      dataType="i4"
+                      name="SalesOrderLineNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesQuantity]"
+                      dataType="i4"
+                      name="SalesQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      dataType="cy"
+                      name="SalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnQuantity]"
+                      dataType="i4"
+                      name="ReturnQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnAmount]"
+                      dataType="cy"
+                      name="ReturnAmount" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountQuantity]"
+                      dataType="i4"
+                      name="DiscountQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountAmount]"
+                      dataType="cy"
+                      name="DiscountAmount" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[TotalCost]"
+                      dataType="cy"
+                      name="TotalCost" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      dataType="cy"
+                      name="UnitCost" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      dataType="i4"
+                      name="ETLLoadID" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[OnlineSalesKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[OnlineSalesKey]"
+                      name="OnlineSalesKey" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      name="StoreKey" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[PromotionKey]"
+                      name="PromotionKey" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      name="CurrencyKey" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[CustomerKey]"
+                      name="CustomerKey" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesOrderNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesOrderNumber]"
+                      name="SalesOrderNumber" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesOrderLineNumber]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesOrderLineNumber]"
+                      name="SalesOrderLineNumber" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesQuantity]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesQuantity]"
+                      name="SalesQuantity" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      name="SalesAmount" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ReturnQuantity]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ReturnQuantity]"
+                      name="ReturnQuantity" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ReturnAmount]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ReturnAmount]"
+                      name="ReturnAmount" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[DiscountQuantity]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[DiscountQuantity]"
+                      name="DiscountQuantity" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[DiscountAmount]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[DiscountAmount]"
+                      name="DiscountAmount" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[TotalCost]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[TotalCost]"
+                      name="TotalCost" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      name="UnitCost" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      name="ETLLoadID" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      name="LoadDate" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SalesPerformance\Lookup Customer"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Customer"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimCustomer]) [refTable]
+where [refTable].[CustomerKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GeographyKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerLabel" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Title" dataType="DT_WSTR" length="8" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MiddleName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NameStyle" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BirthDate" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MaritalStatus" dataType="DT_WSTR" length="1" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Suffix" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Gender" dataType="DT_WSTR" length="1" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EmailAddress" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="YearlyIncome" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TotalChildren" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NumberChildrenAtHome" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Education" dataType="DT_WSTR" length="40" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Occupation" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="HouseOwnerFlag" dataType="DT_WSTR" length="1" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NumberCarsOwned" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine1" dataType="DT_WSTR" length="120" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine2" dataType="DT_WSTR" length="120" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Phone" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateFirstPurchase" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerType" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CompanyName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ETLLoadID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LoadDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UpdateDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[CustomerKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SalesPerformance\Lookup Customer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\SalesPerformance\Lookup Customer.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Inputs[Lookup Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      lineageId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output].Columns[CustomerKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\SalesPerformance\Lookup Customer.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CustomerKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[GeographyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[GeographyKey]"
+                      name="GeographyKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">GeographyKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FirstName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">LastName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="1"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[MaritalStatus]"
+                      name="MaritalStatus"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">MaritalStatus</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="1"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Gender</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[YearlyIncome]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[YearlyIncome]"
+                      name="YearlyIncome"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">YearlyIncome</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[TotalChildren]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[TotalChildren]"
+                      name="TotalChildren"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TotalChildren</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Education]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="40"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Education]"
+                      name="Education"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Education</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Occupation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[Occupation]"
+                      name="Occupation"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Occupation</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[HouseOwnerFlag]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="1"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[HouseOwnerFlag]"
+                      name="HouseOwnerFlag"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">HouseOwnerFlag</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="15"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output].Columns[CustomerType]"
+                      name="CustomerType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CustomerType</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\SalesPerformance\Lookup Customer.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\SalesPerformance\Lookup Customer.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SalesPerformance\Sales Performance"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Sales Performance"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[SalesPerformance]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SalesPerformance\Sales Performance.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[GeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="GeographyKey"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[GeographyKey]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyKey]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[NetSales]"
+                      cachedDataType="cy"
+                      cachedName="NetSales"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[NetSales]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[NetSales]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[MaritalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="MaritalStatus"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[MaritalStatus]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[MaritalStatus]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[YearlyIncome]"
+                      cachedDataType="cy"
+                      cachedName="YearlyIncome"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[YearlyIncome]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[YearlyIncome]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[TotalChildren]"
+                      cachedDataType="ui8"
+                      cachedName="TotalChildren"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[TotalChildren]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[TotalChildren]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[Education]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Education"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[Education]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Education]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[Occupation]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Occupation"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[Occupation]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[Occupation]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[HouseOwnerFlag]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="HouseOwnerFlag"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[HouseOwnerFlag]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[HouseOwnerFlag]" />
+                    <inputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].Columns[CustomerType]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="CustomerType"
+                      externalMetadataColumnId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[CustomerType]"
+                      lineageId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1].Columns[CustomerType]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[GeographyKey]"
+                      dataType="i4"
+                      name="GeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      dataType="wstr"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[NetSales]"
+                      dataType="cy"
+                      name="NetSales" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[MaritalStatus]"
+                      dataType="wstr"
+                      length="1"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="1"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[YearlyIncome]"
+                      dataType="cy"
+                      name="YearlyIncome" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[TotalChildren]"
+                      dataType="numeric"
+                      name="TotalChildren"
+                      precision="20" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[Education]"
+                      dataType="wstr"
+                      length="40"
+                      name="Education" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[Occupation]"
+                      dataType="wstr"
+                      length="100"
+                      name="Occupation" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[HouseOwnerFlag]"
+                      dataType="wstr"
+                      length="1"
+                      name="HouseOwnerFlag" />
+                    <externalMetadataColumn
+                      refId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input].ExternalColumns[CustomerType]"
+                      dataType="wstr"
+                      length="15"
+                      name="CustomerType" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\SalesPerformance\Sales Performance.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Sales Performance.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SalesPerformance\Sales Performance.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SalesPerformance\Sales Performance.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\SalesPerformance.Paths[Aggregate Output 1]"
+              endId="Package\SalesPerformance\Sales Performance.Inputs[OLE DB Destination Input]"
+              name="Aggregate Output 1"
+              startId="Package\SalesPerformance\Aggregate.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\SalesPerformance.Paths[Derived Column Output]"
+              endId="Package\SalesPerformance\Aggregate.Inputs[Aggregate Input 1]"
+              name="Derived Column Output"
+              startId="Package\SalesPerformance\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\SalesPerformance.Paths[Lookup Match Output]"
+              endId="Package\SalesPerformance\Derived Column.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\SalesPerformance\Lookup Customer.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\SalesPerformance.Paths[OLE DB Source Output]"
+              endId="Package\SalesPerformance\Lookup Customer.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\SalesPerformance\Fact Online Sales.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate SalesPerformance"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7D7179E0-C40E-47D4-A337-2D257543BDBF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate SalesPerformance"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C407E756-82D5-4C46-9A70-5001EB2CC8A7}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE SalesPerformance ;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{4C54DA71-C234-4F6E-83AE-0AC5C0FDDF7E}"
+      DTS:From="Package\Truncate SalesPerformance"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\SalesPerformance" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\SalesPerformance"
+          TopLeft="317.857143533777,219.47058804292" />
+        <NodeLayout
+          Size="207.2,41.6"
+          Id="Package\Truncate SalesPerformance"
+          TopLeft="300.714286354427,133.058823412781" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="401.685714944102,174.658823412781">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.8117646301389"
+              Start="0,0"
+              End="0,37.3117646301389">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.3117646301389" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\SalesPerformance">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\SalesPerformance\Aggregate"
+          TopLeft="419.285715178264,329.564705608203" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\SalesPerformance\Fact Online Sales"
+          TopLeft="402.142857998914,81.8235293400432" />
+        <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\SalesPerformance\Lookup Customer"
+          TopLeft="404.285715146332,152.176470454847" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\SalesPerformance\Derived Column"
+          TopLeft="403.571429430526,240.882352730034" />
+        <NodeLayout
+          Size="165.6,41.6"
+          Id="Package\SalesPerformance\Sales Performance"
+          TopLeft="392.857143693432,409.882352581898" />
+        <EdgeLayout
+          Id="Package\SalesPerformance.Paths[OLE DB Source Output]"
+          TopLeft="483.214286572623,123.423529340043">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.7529411148037"
+              Start="0,0"
+              End="0,21.2529411148037">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.2529411148037" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SalesPerformance.Paths[Lookup Match Output]"
+          TopLeft="482.328572288429,193.776470454847">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.105882275187"
+              Start="0,0"
+              End="0,39.605882275187">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.605882275187" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,13.9982536375935,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SalesPerformance.Paths[Derived Column Output]"
+          TopLeft="481.228572304395,282.482352730034">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.0823528781689"
+              Start="0,0"
+              End="0,39.5823528781689">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5823528781689" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SalesPerformance.Paths[Aggregate Output 1]"
+          TopLeft="479.071429435848,371.164705608203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.7176469736953"
+              Start="0,0"
+              End="0,31.2176469736953">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.2176469736953" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SalesPerformance\Fact Online Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SalesPerformance\Lookup Customer">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCustomer]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SalesPerformance\Sales Performance">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

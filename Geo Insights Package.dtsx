@@ -1,0 +1,1966 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/12/2025 3:39:53 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HAZEM"
+  DTS:CreatorName="AzureAD\حازممدحتعبدالعزيزعبد"
+  DTS:DTSID="{2BA36649-F91C-49EC-B9D2-7D0F2A393CC2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{8CDD7C84-B069-47F5-8127-594A66A316A0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F6FE671A-68F9-4A3A-9A12-19300AF9A30C}"
+      DTS:ObjectName="HAZEM.ContosoRetailDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=HAZEM;Initial Catalog=ContosoRetailDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{F6FE671A-68F9-4A3A-9A12-19300AF9A30C}HAZEM.ContosoRetailDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\GeographicInsights"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{f1467aab-ae65-431a-b77d-938d1db3da07}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GeographicInsights"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\GeographicInsights\Aggregate"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[StoreKey]"
+                      cachedDataType="i4"
+                      cachedName="StoreKey"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreKey]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[GeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="GeographyKey"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[GeographyKey]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[StoreName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="StoreName"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[GeographyType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="GeographyType"
+                      lineageId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[GeographyType]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[StoreType]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="StoreType"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[ContinentName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ContinentName"
+                      lineageId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[ContinentName]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[SalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="SalesAmount"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[TotalCost]"
+                      cachedDataType="cy"
+                      cachedName="TotalCost"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[DiscountAmount]"
+                      cachedDataType="cy"
+                      cachedName="DiscountAmount"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreKey]"
+                      name="StoreKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyKey]"
+                      name="GeographyKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[GeographyKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreName]"
+                      name="StoreName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyType]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyType]"
+                      name="GeographyType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[GeographyType]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreType]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreType]"
+                      name="StoreType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[ContinentName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[ContinentName]"
+                      name="ContinentName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[ContinentName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[SalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[SalesAmount]"
+                      name="SalesAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[TotalCost]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[TotalCost]"
+                      name="TotalCost">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[DiscountAmount]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[DiscountAmount]"
+                      name="DiscountAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      name="DateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\GeographicInsights\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input].Columns[SalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="SalesAmount"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[SalesAmount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\GeographicInsights\Conditional Split.Outputs[Tier1]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Tier1"
+                  synchronousInputId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[SalesAmount]} &gt; 100000</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">SalesAmount &gt; 100000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Conditional Split.Outputs[Tier2]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Tier2"
+                  synchronousInputId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[SalesAmount]} &gt; 500000</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">SalesAmount &gt; 500000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Conditional Split.Outputs[Tier3]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Tier3"
+                  synchronousInputId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[SalesAmount]} &lt;= 500000</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">SalesAmount &lt;= 500000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\GeographicInsights\Fact Sales"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Fact Sales"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\GeographicInsights\Fact Sales.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesKey]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]"
+                      name="SalesKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[channelKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[channelKey]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[channelKey]"
+                      name="channelKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      name="StoreKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[PromotionKey]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[PromotionKey]"
+                      name="PromotionKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      name="CurrencyKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      name="UnitCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesQuantity]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]"
+                      name="SalesQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnQuantity]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnQuantity]"
+                      name="ReturnQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnAmount]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]"
+                      name="ReturnAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountQuantity]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountQuantity]"
+                      name="DiscountQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountAmount]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]"
+                      name="DiscountAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[TotalCost]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]"
+                      name="TotalCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      name="SalesAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      name="ETLLoadID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      name="LoadDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesKey]"
+                      dataType="i4"
+                      name="SalesKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[channelKey]"
+                      dataType="i4"
+                      name="channelKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      dataType="i4"
+                      name="StoreKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[PromotionKey]"
+                      dataType="i4"
+                      name="PromotionKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      dataType="i4"
+                      name="CurrencyKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      dataType="cy"
+                      name="UnitCost" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesQuantity]"
+                      dataType="i4"
+                      name="SalesQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnQuantity]"
+                      dataType="i4"
+                      name="ReturnQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnAmount]"
+                      dataType="cy"
+                      name="ReturnAmount" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountQuantity]"
+                      dataType="i4"
+                      name="DiscountQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountAmount]"
+                      dataType="cy"
+                      name="DiscountAmount" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[TotalCost]"
+                      dataType="cy"
+                      name="TotalCost" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      dataType="cy"
+                      name="SalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      dataType="i4"
+                      name="ETLLoadID" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesKey]"
+                      name="SalesKey" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[channelKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[channelKey]"
+                      name="channelKey" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      name="StoreKey" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[PromotionKey]"
+                      name="PromotionKey" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      name="CurrencyKey" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      name="UnitCost" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesQuantity]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesQuantity]"
+                      name="SalesQuantity" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnQuantity]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnQuantity]"
+                      name="ReturnQuantity" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnAmount]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnAmount]"
+                      name="ReturnAmount" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountQuantity]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountQuantity]"
+                      name="DiscountQuantity" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountAmount]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountAmount]"
+                      name="DiscountAmount" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[TotalCost]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[TotalCost]"
+                      name="TotalCost" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      name="SalesAmount" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      name="ETLLoadID" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      name="LoadDate" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\GeographicInsights\Geo Insights"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Geo Insights"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[GeoInsights]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\GeographicInsights\Geo Insights.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[StoreKey]"
+                      cachedDataType="i4"
+                      cachedName="StoreKey"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[StoreKey]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreKey]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[GeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="GeographyKey"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[GeographyKey]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyKey]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[StoreName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="StoreName"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[StoreName]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreName]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[GeographyType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="GeographyType"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[GeographyType]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[GeographyType]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[StoreType]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="StoreType"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[StoreType]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[StoreType]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[ContinentName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ContinentName"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[ContinentName]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[ContinentName]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[SalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="SalesAmount"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[SalesAmount]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[SalesAmount]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[TotalCost]"
+                      cachedDataType="cy"
+                      cachedName="TotalCost"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[TotalCost]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[TotalCost]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[DiscountAmount]"
+                      cachedDataType="cy"
+                      cachedName="DiscountAmount"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[DiscountAmount]" />
+                    <inputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[StoreKey]"
+                      dataType="i4"
+                      name="StoreKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[GeographyKey]"
+                      dataType="i4"
+                      name="GeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[StoreName]"
+                      dataType="wstr"
+                      length="100"
+                      name="StoreName" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[GeographyType]"
+                      dataType="wstr"
+                      length="50"
+                      name="GeographyType" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[StoreType]"
+                      dataType="wstr"
+                      length="15"
+                      name="StoreType" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[ContinentName]"
+                      dataType="wstr"
+                      length="50"
+                      name="ContinentName" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[SalesAmount]"
+                      dataType="cy"
+                      name="SalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[TotalCost]"
+                      dataType="cy"
+                      name="TotalCost" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
+                      dataType="cy"
+                      name="DiscountAmount" />
+                    <externalMetadataColumn
+                      refId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\GeographicInsights\Geo Insights.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Geo Insights.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Geo Insights.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Geo Insights.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\GeographicInsights\Lookup Geography"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Geography"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimGeography]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimGeography]) [refTable]
+where [refTable].[GeographyKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="GeographyKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GeographyType" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ContinentName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StateProvinceName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RegionCountryName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Geometry" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ETLLoadID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LoadDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UpdateDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[GeographyKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\GeographicInsights\Lookup Geography.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\GeographicInsights\Lookup Geography.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\GeographicInsights\Lookup Geography.Inputs[Lookup Input].Columns[GeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="GeographyKey"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[GeographyKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">GeographyKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\GeographicInsights\Lookup Geography.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[GeographyType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[GeographyType]"
+                      name="GeographyType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">GeographyType</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[ContinentName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output].Columns[ContinentName]"
+                      name="ContinentName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ContinentName</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\GeographicInsights\Lookup Geography.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\GeographicInsights\Lookup Geography.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\GeographicInsights\Lookup Store"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Store"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimStore]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimStore]) [refTable]
+where [refTable].[StoreKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StoreKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GeographyKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreManager" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreType" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreDescription" dataType="DT_WSTR" length="300" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Status" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OpenDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CloseDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EntityKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ZipCode" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ZipCodeExtension" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StorePhone" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreFax" dataType="DT_WSTR" length="14" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine1" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine2" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CloseReason" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EmployeeCount" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SellingAreaSize" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastRemodelDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GeoLocation" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Geometry" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ETLLoadID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LoadDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UpdateDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[StoreKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\GeographicInsights\Lookup Store.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\GeographicInsights\Lookup Store.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Inputs[Lookup Input].Columns[StoreKey]"
+                      cachedDataType="i4"
+                      cachedName="StoreKey"
+                      lineageId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output].Columns[StoreKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">StoreKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\GeographicInsights\Lookup Store.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreKey]"
+                      name="StoreKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StoreKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[GeographyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[GeographyKey]"
+                      name="GeographyKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">GeographyKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="15"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreType]"
+                      name="StoreType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StoreType</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[StoreName]"
+                      name="StoreName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StoreName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Status</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[SellingAreaSize]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output].Columns[SellingAreaSize]"
+                      name="SellingAreaSize"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">SellingAreaSize</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\GeographicInsights\Lookup Store.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\GeographicInsights\Lookup Store.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\GeographicInsights.Paths[Aggregate Output 1]"
+              endId="Package\GeographicInsights\Conditional Split.Inputs[Conditional Split Input]"
+              name="Aggregate Output 1"
+              startId="Package\GeographicInsights\Aggregate.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\GeographicInsights.Paths[Lookup Match Output]"
+              endId="Package\GeographicInsights\Lookup Geography.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\GeographicInsights\Lookup Store.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\GeographicInsights.Paths[Lookup Match Output1]"
+              endId="Package\GeographicInsights\Aggregate.Inputs[Aggregate Input 1]"
+              name="Lookup Match Output"
+              startId="Package\GeographicInsights\Lookup Geography.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\GeographicInsights.Paths[OLE DB Source Output]"
+              endId="Package\GeographicInsights\Lookup Store.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\GeographicInsights\Fact Sales.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\GeographicInsights.Paths[Tier1]"
+              endId="Package\GeographicInsights\Geo Insights.Inputs[OLE DB Destination Input]"
+              name="Tier1"
+              startId="Package\GeographicInsights\Conditional Split.Outputs[Tier1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Trancuate GeographicInsights"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{962bb642-d54e-4d8e-be39-d9cba52da362}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Trancuate GeographicInsights"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F6FE671A-68F9-4A3A-9A12-19300AF9A30C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE GeoInsights ;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{a6df4e97-ee49-4283-93d4-1f616a5de1a7}"
+      DTS:From="Package\Trancuate GeographicInsights"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\GeographicInsights" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\GeographicInsights"
+          TopLeft="80.000000042575,170.882352843983" />
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\Trancuate GeographicInsights"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="167.000000021288,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.282352843983"
+              Start="0,0"
+              End="0,61.782352843983">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.782352843983" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\GeographicInsights">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="125.6,41.6"
+          Id="Package\GeographicInsights\Fact Sales"
+          TopLeft="603.999990999699,18.9999997168779" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\GeographicInsights\Lookup Geography"
+          TopLeft="595.999991118908,184.999997243285" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\GeographicInsights\Conditional Split"
+          TopLeft="603.999990999699,345.999994844198" />
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\GeographicInsights\Aggregate"
+          TopLeft="617.999990791083,270.999995961785" />
+        <NodeLayout
+          Size="137.6,41.6"
+          Id="Package\GeographicInsights\Geo Insights"
+          TopLeft="602.9999910146,428.999993607402" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\GeographicInsights\Lookup Store"
+          TopLeft="608.999990925193,104.999998435378" />
+        <EdgeLayout
+          Id="Package\GeographicInsights.Paths[Tier1]"
+          TopLeft="681.199990999699,387.599994844198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.39999998509904,41.399998763204"
+              Start="0,0"
+              End="-9.39999998509904,33.899998763204">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.699999381602" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.699999381602"
+                    Point2="0,20.699999381602"
+                    Point3="-4,20.699999381602" />
+                  <mssgle:LineSegment
+                    End="-5.39999998509904,20.699999381602" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.39999998509904,20.699999381602"
+                    Point2="-9.39999998509904,20.699999381602"
+                    Point3="-9.39999998509904,24.699999381602" />
+                  <mssgle:LineSegment
+                    End="-9.39999998509904,33.899998763204" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-16.5216601487995,25.699999381602,23.6433203125,9.4462890625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\GeographicInsights.Paths[OLE DB Source Output]"
+          TopLeft="666.799990999699,60.5999997168779">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.599999925494,44.3999987185001"
+              Start="0,0"
+              End="12.599999925494,36.8999987185001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.1999993592501" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.1999993592501"
+                    Point2="0,22.1999993592501"
+                    Point3="4,22.1999993592501" />
+                  <mssgle:LineSegment
+                    End="8.59999992549399,22.1999993592501" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.59999992549399,22.1999993592501"
+                    Point2="12.599999925494,22.1999993592501"
+                    Point3="12.599999925494,26.1999993592501" />
+                  <mssgle:LineSegment
+                    End="12.599999925494,36.8999987185001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\GeographicInsights.Paths[Lookup Match Output1]"
+          TopLeft="680.399990954995,226.599997243285">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.3999987185002"
+              Start="0,0"
+              End="0,36.8999987185002">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.8999987185002" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,12.6453118592501,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\GeographicInsights.Paths[Lookup Match Output]"
+          TopLeft="679.49999102205,146.599998435378">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.3999988079071"
+              Start="0,0"
+              End="0,30.8999988079071">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.8999988079071" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,9.64531190395356,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\GeographicInsights.Paths[Aggregate Output 1]"
+          TopLeft="681.199990895391,312.599995961785">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.3999988824129"
+              Start="0,0"
+              End="0,25.8999988824129">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.8999988824129" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\GeographicInsights\Fact Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\GeographicInsights\Lookup Geography">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimGeography]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\GeographicInsights\Geo Insights">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\GeographicInsights\Lookup Store">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStore]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

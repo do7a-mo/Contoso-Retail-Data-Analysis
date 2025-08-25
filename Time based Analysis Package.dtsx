@@ -1,0 +1,2015 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/12/2025 3:40:16 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HAZEM"
+  DTS:CreatorName="AzureAD\حازممدحتعبدالعزيزعبد"
+  DTS:DTSID="{0AA64B58-D403-4A02-95FA-401E504CFE96}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{66AB3268-EA1E-40D2-83E4-101CD9D5CA6E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{984D5234-6DD2-497E-9E61-6C146034AAE6}"
+      DTS:ObjectName="HAZEM.ContosoRetailDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=HAZEM;Initial Catalog=ContosoRetailDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{984D5234-6DD2-497E-9E61-6C146034AAE6}HAZEM.ContosoRetailDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Monthly Trends (YoY)"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{f06eff16-614a-4ccf-a80a-9be64e6ca7dc}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Monthly Trends (YoY)"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Monthly Trends (YoY)\Aggregate"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[CalendarYear]"
+                      cachedDataType="i4"
+                      cachedName="CalendarYear"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarYear]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[Net Sales]"
+                      cachedDataType="cy"
+                      cachedName="Net Sales"
+                      lineageId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Output].Columns[Net Sales]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[CalendarQuarterLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CalendarQuarterLabel"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarQuarterLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[CalendarMonthLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CalendarMonthLabel"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarMonthLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[CalendarWeekLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CalendarWeekLabel"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarWeekLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[CalendarDayOfWeekLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="CalendarDayOfWeekLabel"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarDayOfWeekLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[IsWorkDay]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="IsWorkDay"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsWorkDay]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[IsHoliday]"
+                      cachedDataType="i4"
+                      cachedName="IsHoliday"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsHoliday]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[HolidayName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="HolidayName"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[HolidayName]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[EuropeSeason]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EuropeSeason"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[EuropeSeason]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[NorthAmericaSeason]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="NorthAmericaSeason"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[NorthAmericaSeason]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[AsiaSeason]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="AsiaSeason"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[AsiaSeason]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[TotalCost]"
+                      cachedDataType="cy"
+                      cachedName="TotalCost"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[DiscountAmount]"
+                      cachedDataType="cy"
+                      cachedName="DiscountAmount"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[ReturnAmount]"
+                      cachedDataType="cy"
+                      cachedName="ReturnAmount"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1].Columns[SalesQuantity]"
+                      cachedDataType="i4"
+                      cachedName="SalesQuantity"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarYear]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarYear]"
+                      name="CalendarYear">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarYear]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarQuarterLabel]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarQuarterLabel]"
+                      name="CalendarQuarterLabel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarQuarterLabel]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarMonthLabel]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarMonthLabel]"
+                      name="CalendarMonthLabel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarMonthLabel]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarWeekLabel]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarWeekLabel]"
+                      name="CalendarWeekLabel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarWeekLabel]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarDayOfWeekLabel]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarDayOfWeekLabel]"
+                      name="CalendarDayOfWeekLabel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarDayOfWeekLabel]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[Net Sales]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[Net Sales]"
+                      name="Net Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Output].Columns[Net Sales]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[IsWorkDay]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[IsWorkDay]"
+                      name="IsWorkDay">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsWorkDay]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[IsHoliday]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[IsHoliday]"
+                      name="IsHoliday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsHoliday]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[HolidayName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[HolidayName]"
+                      name="HolidayName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[HolidayName]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[EuropeSeason]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[EuropeSeason]"
+                      name="EuropeSeason">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[EuropeSeason]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[NorthAmericaSeason]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[NorthAmericaSeason]"
+                      name="NorthAmericaSeason">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[NorthAmericaSeason]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[AsiaSeason]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[AsiaSeason]"
+                      name="AsiaSeason">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[AsiaSeason]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[DateKey]"
+                      name="DateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[TotalCost]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[TotalCost]"
+                      name="TotalCost">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[DiscountAmount]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[DiscountAmount]"
+                      name="DiscountAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[ReturnAmount]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[ReturnAmount]"
+                      name="ReturnAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[SalesQuantity]"
+                      dataType="i8"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[SalesQuantity]"
+                      name="SalesQuantity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Monthly Trends (YoY)\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Monthly Trends (YoY)\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Derived Column.Inputs[Derived Column Input].Columns[ReturnAmount]"
+                      cachedDataType="cy"
+                      cachedName="ReturnAmount"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Derived Column.Inputs[Derived Column Input].Columns[DiscountAmount]"
+                      cachedDataType="cy"
+                      cachedName="DiscountAmount"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Derived Column.Inputs[Derived Column Input].Columns[SalesAmount]"
+                      cachedDataType="cy"
+                      cachedName="SalesAmount"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Monthly Trends (YoY)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Output].Columns[Net Sales]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Output].Columns[Net Sales]"
+                      name="Net Sales"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]} - #{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]} - #{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SalesAmount - ReturnAmount - DiscountAmount</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Monthly Trends (YoY)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Monthly Trends (YoY)\Fact Sales"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Fact Sales"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Monthly Trends (YoY)\Fact Sales.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesKey]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesKey]"
+                      name="SalesKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[channelKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[channelKey]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[channelKey]"
+                      name="channelKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[StoreKey]"
+                      name="StoreKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[PromotionKey]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[PromotionKey]"
+                      name="PromotionKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[CurrencyKey]"
+                      name="CurrencyKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      name="UnitCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesQuantity]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesQuantity]"
+                      name="SalesQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnQuantity]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnQuantity]"
+                      name="ReturnQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnAmount]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ReturnAmount]"
+                      name="ReturnAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountQuantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountQuantity]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountQuantity]"
+                      name="DiscountQuantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountAmount]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DiscountAmount]"
+                      name="DiscountAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[TotalCost]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[TotalCost]"
+                      name="TotalCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[SalesAmount]"
+                      name="SalesAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[ETLLoadID]"
+                      name="ETLLoadID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                      name="LoadDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesKey]"
+                      dataType="i4"
+                      name="SalesKey" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="dbTimeStamp"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[channelKey]"
+                      dataType="i4"
+                      name="channelKey" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[StoreKey]"
+                      dataType="i4"
+                      name="StoreKey" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[PromotionKey]"
+                      dataType="i4"
+                      name="PromotionKey" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[CurrencyKey]"
+                      dataType="i4"
+                      name="CurrencyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      dataType="cy"
+                      name="UnitCost" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesQuantity]"
+                      dataType="i4"
+                      name="SalesQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnQuantity]"
+                      dataType="i4"
+                      name="ReturnQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ReturnAmount]"
+                      dataType="cy"
+                      name="ReturnAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountQuantity]"
+                      dataType="i4"
+                      name="DiscountQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[DiscountAmount]"
+                      dataType="cy"
+                      name="DiscountAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[TotalCost]"
+                      dataType="cy"
+                      name="TotalCost" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[SalesAmount]"
+                      dataType="cy"
+                      name="SalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[ETLLoadID]"
+                      dataType="i4"
+                      name="ETLLoadID" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesKey]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesKey]"
+                      name="SalesKey" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[channelKey]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[channelKey]"
+                      name="channelKey" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[StoreKey]"
+                      name="StoreKey" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[PromotionKey]"
+                      name="PromotionKey" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[CurrencyKey]"
+                      name="CurrencyKey" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      name="UnitCost" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesQuantity]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesQuantity]"
+                      name="SalesQuantity" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnQuantity]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnQuantity]"
+                      name="ReturnQuantity" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnAmount]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ReturnAmount]"
+                      name="ReturnAmount" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountQuantity]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountQuantity]"
+                      name="DiscountQuantity" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountAmount]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[DiscountAmount]"
+                      name="DiscountAmount" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[TotalCost]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[TotalCost]"
+                      name="TotalCost" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[SalesAmount]"
+                      name="SalesAmount" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ETLLoadID]"
+                      name="ETLLoadID" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                      name="LoadDate" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Monthly Trends (YoY)\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimDate]) [refTable]
+where [refTable].[Datekey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Datekey" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FullDateLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateDescription" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarYear" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarYearLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarHalfYear" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarHalfYearLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarQuarter" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarQuarterLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarMonth" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarMonthLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarWeek" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarWeekLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarDayOfWeek" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CalendarDayOfWeekLabel" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalYear" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalYearLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalHalfYear" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalHalfYearLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalQuarter" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalQuarterLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalMonth" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FiscalMonthLabel" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsWorkDay" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsHoliday" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="HolidayName" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EuropeSeason" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NorthAmericaSeason" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AsiaSeason" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Monthly Trends (YoY)\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Monthly Trends (YoY)\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Inputs[Lookup Input].Columns[DateKey]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateKey"
+                      lineageId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output].Columns[DateKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Datekey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Monthly Trends (YoY)\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[DateDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[DateDescription]"
+                      name="DateDescription"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateDescription</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarYear]"
+                      name="CalendarYear"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CalendarYear</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarQuarterLabel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarQuarterLabel]"
+                      name="CalendarQuarterLabel"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CalendarQuarterLabel</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarMonthLabel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarMonthLabel]"
+                      name="CalendarMonthLabel"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CalendarMonthLabel</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarWeekLabel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarWeekLabel]"
+                      name="CalendarWeekLabel"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CalendarWeekLabel</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarDayOfWeekLabel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="10"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[CalendarDayOfWeekLabel]"
+                      name="CalendarDayOfWeekLabel"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CalendarDayOfWeekLabel</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsWorkDay]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsWorkDay]"
+                      name="IsWorkDay"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">IsWorkDay</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsHoliday]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[IsHoliday]"
+                      name="IsHoliday"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">IsHoliday</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[HolidayName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[HolidayName]"
+                      name="HolidayName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">HolidayName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[EuropeSeason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[EuropeSeason]"
+                      name="EuropeSeason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">EuropeSeason</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[NorthAmericaSeason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[NorthAmericaSeason]"
+                      name="NorthAmericaSeason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">NorthAmericaSeason</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[AsiaSeason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output].Columns[AsiaSeason]"
+                      name="AsiaSeason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AsiaSeason</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Monthly Trends (YoY)\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Monthly Trends (YoY)\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Monthly Trends (YoY)\Sales Over Time"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Sales Over Time"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Sales Over Time]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Monthly Trends (YoY)\Sales Over Time.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[HAZEM.ContosoRetailDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[CalendarYear]"
+                      cachedDataType="i4"
+                      cachedName="CalendarYear"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarYear]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[CalendarQuarterLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CalendarQuarterLabel"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarQuarterLabel]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarQuarterLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[CalendarMonthLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CalendarMonthLabel"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarMonthLabel]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarMonthLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[CalendarWeekLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CalendarWeekLabel"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarWeekLabel]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarWeekLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[CalendarDayOfWeekLabel]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="CalendarDayOfWeekLabel"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarDayOfWeekLabel]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[CalendarDayOfWeekLabel]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[Net Sales]"
+                      cachedDataType="cy"
+                      cachedName="Net Sales"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[Net Sales]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[Net Sales]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[IsWorkDay]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="IsWorkDay"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[IsWorkDay]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[IsWorkDay]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[IsHoliday]"
+                      cachedDataType="i4"
+                      cachedName="IsHoliday"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[IsHoliday]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[IsHoliday]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[HolidayName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="HolidayName"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[HolidayName]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[HolidayName]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[EuropeSeason]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EuropeSeason"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[EuropeSeason]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[EuropeSeason]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[NorthAmericaSeason]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="NorthAmericaSeason"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[NorthAmericaSeason]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[NorthAmericaSeason]" />
+                    <inputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].Columns[AsiaSeason]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="AsiaSeason"
+                      externalMetadataColumnId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[AsiaSeason]"
+                      lineageId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1].Columns[AsiaSeason]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
+                      dataType="i4"
+                      name="CalendarYear" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarQuarterLabel]"
+                      dataType="wstr"
+                      length="20"
+                      name="CalendarQuarterLabel" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarMonthLabel]"
+                      dataType="wstr"
+                      length="20"
+                      name="CalendarMonthLabel" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarWeekLabel]"
+                      dataType="wstr"
+                      length="20"
+                      name="CalendarWeekLabel" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[CalendarDayOfWeekLabel]"
+                      dataType="wstr"
+                      length="10"
+                      name="CalendarDayOfWeekLabel" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[Net Sales]"
+                      dataType="cy"
+                      name="Net Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[IsWorkDay]"
+                      dataType="wstr"
+                      length="20"
+                      name="IsWorkDay" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[IsHoliday]"
+                      dataType="i4"
+                      name="IsHoliday" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[HolidayName]"
+                      dataType="wstr"
+                      length="20"
+                      name="HolidayName" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[EuropeSeason]"
+                      dataType="wstr"
+                      length="50"
+                      name="EuropeSeason" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[NorthAmericaSeason]"
+                      dataType="wstr"
+                      length="50"
+                      name="NorthAmericaSeason" />
+                    <externalMetadataColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input].ExternalColumns[AsiaSeason]"
+                      dataType="wstr"
+                      length="50"
+                      name="AsiaSeason" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Monthly Trends (YoY)\Sales Over Time.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Sales Over Time.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Monthly Trends (YoY)\Sales Over Time.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Monthly Trends (YoY)\Sales Over Time.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Monthly Trends (YoY).Paths[Aggregate Output 1]"
+              endId="Package\Monthly Trends (YoY)\Sales Over Time.Inputs[OLE DB Destination Input]"
+              name="Aggregate Output 1"
+              startId="Package\Monthly Trends (YoY)\Aggregate.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\Monthly Trends (YoY).Paths[Derived Column Output]"
+              endId="Package\Monthly Trends (YoY)\Lookup.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Monthly Trends (YoY)\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Monthly Trends (YoY).Paths[Lookup Match Output]"
+              endId="Package\Monthly Trends (YoY)\Aggregate.Inputs[Aggregate Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Monthly Trends (YoY)\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Monthly Trends (YoY).Paths[OLE DB Source Output]"
+              endId="Package\Monthly Trends (YoY)\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Monthly Trends (YoY)\Fact Sales.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Trancuate Sales Over Time"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{31bd676d-9667-4ea3-b754-278bed356409}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Trancuate Sales Over Time"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{984D5234-6DD2-497E-9E61-6C146034AAE6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [Sales Over Time];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{95dd10ae-21d5-4960-ab67-ea11d85d7db9}"
+      DTS:From="Package\Trancuate Sales Over Time"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Monthly Trends (YoY)" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Monthly Trends (YoY)"
+          TopLeft="80.000000042575,170.882352843983" />
+        <NodeLayout
+          Size="205.6,41.6"
+          Id="Package\Trancuate Sales Over Time"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="166.600000021288,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.2823528439837"
+              Start="0,0"
+              End="0,61.7823528439837">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.7823528439837" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Monthly Trends (YoY)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Monthly Trends (YoY)\Derived Column"
+          TopLeft="559.99999165535,199.999997019768" />
+        <NodeLayout
+          Size="125.6,41.6"
+          Id="Package\Monthly Trends (YoY)\Fact Sales"
+          TopLeft="563.999991595745,121.999998182058" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Monthly Trends (YoY)\Lookup"
+          TopLeft="582.999991312623,278.999995842576" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Monthly Trends (YoY)\Sales Over Time"
+          TopLeft="557.999991685152,452.999993249774" />
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\Monthly Trends (YoY)\Aggregate"
+          TopLeft="575.999991416931,363.999994575977" />
+        <EdgeLayout
+          Id="Package\Monthly Trends (YoY).Paths[Aggregate Output 1]"
+          TopLeft="637.399991551042,405.599994575977">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.399998673797"
+              Start="0,0"
+              End="0,39.899998673797">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.899998673797" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Monthly Trends (YoY).Paths[OLE DB Source Output]"
+          TopLeft="626.799991595745,163.599998182058">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.60000005960501,36.39999883771"
+              Start="0,0"
+              End="9.60000005960501,28.89999883771">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.199999418855" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.199999418855"
+                    Point2="0,18.199999418855"
+                    Point3="4,18.199999418855" />
+                  <mssgle:LineSegment
+                    End="5.60000005960501,18.199999418855" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.60000005960501,18.199999418855"
+                    Point2="9.60000005960501,18.199999418855"
+                    Point3="9.60000005960501,22.199999418855" />
+                  <mssgle:LineSegment
+                    End="9.60000005960501,28.89999883771" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Monthly Trends (YoY).Paths[Lookup Match Output]"
+          TopLeft="639.299991364777,320.599995842576">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.3999987334014"
+              Start="0,0"
+              End="0,35.8999987334014">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.8999987334014" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,12.1453118667007,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Monthly Trends (YoY).Paths[Derived Column Output]"
+          TopLeft="637.899991483986,241.599997019768">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.3999988228082"
+              Start="0,0"
+              End="0,29.8999988228082">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8999988228082" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Monthly Trends (YoY)\Sales Over Time">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Monthly Trends (YoY)\Fact Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Monthly Trends (YoY)\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimDate]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
